@@ -1,7 +1,9 @@
+from django.core.urlresolvers import resolve
 from django.test import TestCase
 
-class SmokeTest(TestCase):
+class SmokeTests(TestCase):
 
-    def test_bad_maths(self):
-        self.assertEqual(1 + 1, 3)
+    def test_sanity(self):
+        """Confirm that math works today."""
+        self.assertEqual(1 + 1, 2)
 
