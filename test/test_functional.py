@@ -9,7 +9,7 @@ class NewVisitorTest(unittest.TestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
-        self.browser.implicitly_wait(3)
+        self.browser.implicitly_wait(2)
 
     def tearDown(self):
         self.browser.quit()
@@ -41,23 +41,26 @@ class NewVisitorTest(unittest.TestCase):
 
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
-        expected = '1: Buy peacock feathers'
-        self.assertTrue(
-            any(row.text == expected for row in rows),
-            'New to-do item did not appear in table'
-        )
+        itemOne = '1: Buy peacock feathers'
+        self.assertIn(itemOne, [row.text for row in rows])
 
         # there is still text inviting her to add another item. She enters
         # "use peacock feathers to make a fly" (she is very methodical)
-        self.fail('Finish the test! It still needs a second TODO item')
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox.send_keys('Use peacock feathers to make a fly')
+        inputbox.send_keys(Keys.ENTER)
 
         # The page updates again, and now shows both items on her list.
-
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertIn(itemOne, [row.text for row in rows])
+        itemTwo = '2: Use peacock feathers to make a fly'
+        self.assertIn(itemTwo, [row.text for row in rows])
 
         # Edith wonders whether or not the site will remember her list. Then
         # she sees that the site has generated a unique URL for her. There is
         #  now some explanatory text to that effect
-
+        self.fail('Finish the test! Still need to generate a unique URL')
 
         # She visits that URL and sees that her to-do list is still there.
 
