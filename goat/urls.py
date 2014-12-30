@@ -3,7 +3,11 @@ from django.contrib import admin
 
 urlpatterns = patterns('',
 
-    url(r'^$', 'goat.apps.lists.views.home_page', name='home_page'),
-
+    url(r'^$',
+        'goat.apps.lists.views.home_page',
+        name='home_page'),
+    url(r'^lists/uberlist/$',
+        'goat.apps.lists.views.view_list',
+        name = 'view_list')
     #url(r'^admin/', include(admin.site.urls)),
 )

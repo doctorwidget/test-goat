@@ -7,7 +7,7 @@ from goat.apps.lists.models import Item
 from goat.apps.lists.views import home_page
 
 
-class ListViewsTester(TestCase):
+class HomePageTest(TestCase):
 
     def test_root_url_resolves_to_home_page_view(self):
         found = resolve('/')
@@ -39,19 +39,27 @@ class ListViewsTester(TestCase):
         response = home_page(request)
 
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response['location'], '/')
+        self.assertEqual(response['location'], '/lists/uberlist/')
 
     def test_home_page_only_saves_items_when_necessary(self):
         request = HttpRequest()
         home_page(request)
         self.assertEqual(Item.objects.count(), 0)
 
-    def test_home_page_displays_all_list_items(self):
+
+class ListViewTest(TestCase):
+
+    def test_uses_list_template(self):
+        response = self.client.get('/lists/uberlist/')
+        self.assertTemplateUsed(response, 'lists/list.html')
+
+    def test_displays_all_list_items(self):
         Item.objects.create(text='itemey 1')
         Item.objects.create(text='itemey 2')
 
-        response = home_page(HttpRequest())
+        response = self.client.get('/lists/uberlist/')
 
-        self.assertIn('itemey 1', response.content.decode())
-        self.assertIn('itemey 2', response.content.decode())
+        self.assertContains(response, 'itemey 1')
+        self.assertContains(response, 'itemey 2')
+
 
