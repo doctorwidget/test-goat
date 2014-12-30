@@ -3,7 +3,7 @@ from django.http import HttpRequest
 from django.test import TestCase
 from django.template.loader import render_to_string
 
-from goat.apps.lists.models import Item
+from goat.apps.lists.models import Item, List
 from goat.apps.lists.views import home_page
 
 
@@ -27,8 +27,9 @@ class ListViewTest(TestCase):
         self.assertTemplateUsed(response, 'lists/list.html')
 
     def test_displays_all_list_items(self):
-        Item.objects.create(text='itemey 1')
-        Item.objects.create(text='itemey 2')
+        alist = List.objects.create()
+        Item.objects.create(text='itemey 1', list=alist)
+        Item.objects.create(text='itemey 2', list=alist)
 
         response = self.client.get('/lists/uberlist/')
 
