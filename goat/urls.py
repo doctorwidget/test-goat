@@ -8,6 +8,9 @@ urlpatterns = patterns('',
         name='home_page'),
     url(r'^lists/uberlist/$',
         'goat.apps.lists.views.view_list',
-        name = 'view_list')
+        name = 'view_list'),
+    url(r'^lists/new$',
+        'goat.apps.lists.views.new_list',
+        name = 'new_list'),
     #url(r'^admin/', include(admin.site.urls)),
 )
