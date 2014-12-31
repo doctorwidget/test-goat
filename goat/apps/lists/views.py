@@ -25,3 +25,6 @@ def add_item(request, list_id):
         list=list_
     )
     return redirect('/lists/%d/' % (list_.id,))
+
+def bootstrap_customization(request):
+    return render(request, 'lists/bootstrap_demo.html')

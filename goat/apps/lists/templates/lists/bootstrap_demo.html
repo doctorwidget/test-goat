@@ -1,0 +1,23 @@
+{% extends 'lists/base.html' %}
+
+{% block header_text %}Start a To-Do list{% endblock %}
+
+{% block table %}
+<div>
+    <button class="btn btn-lg btn-primary">I am primary</button>
+    <button class="btn btn-lg btn-success">I am success</button>
+    <button class="btn btn-lg btn-info">I am info</button>
+    <button class="btn btn-lg btn-warning">I am warning</button>
+    <button class="btn btn-lg btn-danger">I am danger</button>
+</div>
+<hr>
+<div>
+    <p class="alert alert-danger">I am alert-danger</p>
+
+    <p class="alert alert-info">I am alert-info</p>
+
+    <p class="alert alert-success">I am alert-success</p>
+
+    <p class="alert alert-warning">I am alert-warning</p>
+</div>
+{% endblock table %}

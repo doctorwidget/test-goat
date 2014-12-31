@@ -11,5 +11,7 @@ urlpatterns = patterns('',
     url(r'^new$',
         'goat.apps.lists.views.new_list',
         name = 'new_list'),
-
+    url(r'^colors$',
+        'goat.apps.lists.views.bootstrap_customization',
+        name = 'bootstrap_customization')
 )
