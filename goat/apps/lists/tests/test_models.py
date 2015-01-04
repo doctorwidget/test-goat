@@ -1,4 +1,5 @@
 
+from django.core.exceptions import ValidationError
 from django.test import TestCase
 
 from goat.apps.lists.models import Item, List
@@ -33,3 +34,10 @@ class ListAndItemModelTest(TestCase):
         self.assertEqual(first_saved_item.list, alist)
         self.assertEqual(second_saved_item.text, second_text)
         self.assertEqual(second_saved_item.list, alist)
+
+    def test_cannot_save_empty_list_items(self):
+        list_ = List.objects.create()
+        item_ = Item(list=list_, text='')
+        with self.assertRaises(ValidationError):
+            item_.save()          # save() does not trigger validation, DOH!
+            item_.full_clean()    # but full_clean() does, hooray
