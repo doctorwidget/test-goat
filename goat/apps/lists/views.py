@@ -1,11 +1,12 @@
 from django.core.exceptions import ValidationError
 from django.shortcuts import redirect, render
 
+from goat.apps.lists.forms import ItemForm
 from goat.apps.lists.models import Item, List
 
 
 def home_page(request):
-    return render(request, 'lists/home.html')
+    return render(request, 'lists/home.html', {'form': ItemForm()})
 
 
 def view_list(request, list_id):

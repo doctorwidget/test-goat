@@ -4,21 +4,20 @@ from django.test import TestCase
 from django.template.loader import render_to_string
 from django.utils.html import escape
 
+from goat.apps.lists.forms import ItemForm
 from goat.apps.lists.models import Item, List
 from goat.apps.lists.views import home_page
 
 
 class HomePageTest(TestCase):
 
-    def test_root_url_resolves_to_home_page_view(self):
-        found = resolve('/')
-        self.assertEqual(found.func, home_page)
+    def test_home_page_renders_home_template(self):
+        response = self.client.get('/')
+        self.assertTemplateUsed(response, 'lists/home.html')
 
-    def test_home_page_returns_correct_html(self):
-        request = HttpRequest()
-        response = home_page(request)
-        expected = render_to_string('lists/home.html')
-        self.assertEqual(response.content.decode(), expected)
+    def test_home_page_uses_item_form(self):
+        response = self.client.get('/')
+        self.assertIsInstance(response.context['form'], ItemForm)
 
 
 class ListViewTest(TestCase):
