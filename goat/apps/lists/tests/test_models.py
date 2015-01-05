@@ -41,3 +41,7 @@ class ListAndItemModelTest(TestCase):
         with self.assertRaises(ValidationError):
             item_.save()          # save() does not trigger validation, DOH!
             item_.full_clean()    # but full_clean() does, hooray
+
+    def test_get_absolute_url(self):
+        list_ = List.objects.create()
+        self.assertEqual(list_.get_absolute_url(), '/lists/%s/' % (list_.id,))

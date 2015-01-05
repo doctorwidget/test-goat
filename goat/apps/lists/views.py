@@ -20,7 +20,7 @@ def view_list(request, list_id):
             )
             item_.full_clean()
             item_.save()
-            return redirect('/lists/%d/' % (list_.id))
+            return redirect(list_)
         except ValidationError:
             error = "You can't have an empty list item"
 
@@ -41,7 +41,7 @@ def new_list(request):
         error = "You can't have an empty list item"
         return render(request, 'lists/home.html', {'error': error})
 
-    return redirect('/lists/%d/' % (list_.id,))
+    return redirect(list_)
 
 
 def bootstrap_customization(request):
