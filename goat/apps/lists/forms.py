@@ -43,4 +43,6 @@ class ExistingListItemForm(ItemForm):
             e.error_dict = {'text': [DUPLICATE_ITEM_ERROR]}
             self._update_errors(e)
 
-
+    def save(self):
+        """Call the *grandparent* save method"""
+        return forms.models.ModelForm.save(self)
