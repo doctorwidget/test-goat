@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Javascript Tests</title>
+    <link rel="stylesheet" href="qunit.css">
+</head>
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture">
+        <form>
+            <input name="text" placeholder=""/>
+
+            <div class="has-error">Error text</div>
+        </form>
+    </div>
+
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="qunit.js"></script>
+    <script src="../js/list.js"></script>
+    <script>
+        /*global $, test, equal */
+        var target = '.has-error',
+                visible = ':visible';
+
+        test("errors should be hidden on keypress", function(){
+           $('input').trigger('keypress');
+            equal($(target).is(visible), false);
+        });
+
+        test("errors should not be hidden until keypress", function() {
+            equal($(target).is(visible), true);
+        });
+
+    </script>
+</body>
+</html>
