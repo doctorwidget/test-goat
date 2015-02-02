@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'goat.apps.lists',
+    'goat.apps.accounts',
 )
 
 MIDDLEWARE_CLASSES = (
