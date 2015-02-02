@@ -6,3 +6,8 @@ div.jumbotron {
     margin-top: 2em;
     padding-top: 1em;
 }
+
+nav {
+    margin-top: 0.5em;
+    padding-right: 1em;
+}
