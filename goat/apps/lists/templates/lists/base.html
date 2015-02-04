@@ -48,7 +48,14 @@
 <script src="/static/accounts/accounts.js"></script>
 <script>
     $(document).ready(function() {
-          Goat.Accounts.initialize(navigator);
+        var user = "{{ user.email }}" || null;
+        var token = "{{ csrf_token }}";
+        var urls = {
+            login: "TODO",
+            logout: "TODO"
+        };
+
+        Goat.Accounts.initialize(navigator, user, token, urls);
     });
 </script>
 </body>
