@@ -8,7 +8,7 @@ class LoginTest(FunctionalTest):
        retries = 60
        while retries > 0:
             for handle in self.browser.window_handles:
-                self.browser.switch_to_window(handle)
+                self.browser.switch_to.window(handle)
                 if text_in_title in self.browser.title:
                     return
             retries -= 1
@@ -41,7 +41,7 @@ class LoginTest(FunctionalTest):
        self.switch_to_new_window('To-Do')
 
        # She can see that she is logged in
-       self.wait_for_element_with_id('logout')
+       self.wait_for_element_with_id('id_logout')
        navbar = self.browser.find_element_by_css_selector('.navbar')
 
        self.assertIn('edith@mockmyid.com', navbar.text)
