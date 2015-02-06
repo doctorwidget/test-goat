@@ -29,8 +29,9 @@ class FunctionalTest(StaticLiveServerTestCase):
             super().tearDownClass()
 
     def setUp(self):
-        if self.against_staging:
-            reset_database(self.server_host)
+        # NOTE: see .server_tools for why this is disabled
+        #if self.against_staging:
+        #    reset_database(self.server_host)
         self.browser = webdriver.Firefox()
         self.browser.implicitly_wait(2)
 

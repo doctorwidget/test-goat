@@ -1,3 +1,18 @@
+"""
+NOTE: This is straight from Percival's book and it does not work!
+
+Percival assumes that you have fabric installed in a global 2.x environment.
+But I have my fabric in a virtualenv, because (duh), that's the only place
+you should ever install anything. Hence, the subprocess call to 'fab' just
+returns a 'not found' error.
+
+To make this work would require figuring out how to make the subprocess
+module run commands within a virtualenv. Not worth my time, especially
+since too much of this back door server magic  makes your functional tests
+suspicious anyway. Much better to write a functional test that doesn't
+require back door server shenanigans!
+
+"""
 from os import path
 import subprocess
 
