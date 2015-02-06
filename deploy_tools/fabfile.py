@@ -4,6 +4,21 @@ only. That means this file can only be run from inside an independent, second
 virtualenv that uses 2.X, and not from the main one where everything else
 runs. I find this to be surprisingly irritating!
 
+Note that after running this script you will always need to
+
+#. SSH into an admin account
+#. manually restart the gunicorn server
+
+.. code-block:: bash
+
+    $: ssh nathaniel@goat-staging.ceratops.net
+    #... request and supply password
+    #... Welcome to Ubuntu 14.04.1 LTS...
+
+    nathaniel@ceratops $: sudo restart gunicorn-goat-staging.ceratops.net
+    #... [sudo] request and supply password
+    #... gunicorn-goat-staging.ceratops.net start/running, process 32101
+
 """
 import random
 
@@ -70,11 +85,7 @@ def _update_settings(source_folder, site_name):
     settings_path = source_folder + '/goat/settings.py'
 
     sed(settings_path, "DEBUG = True", "DEBUG = False")
-    sed(settings_path,
-        'ALLOWED_HOSTS = .+$',
-        'ALLOWED_HOSTS = ["%s"]' % (site_name,)
-    )
-
+    sed(settings_path, 'DOMAIN = "localhost"', 'DOMAIN = "%s"' % (site_name,))
     secret_key_file = source_folder + '/goat/secret_key.py'
 
     if not exists(secret_key_file):
