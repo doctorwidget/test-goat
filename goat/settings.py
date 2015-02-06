@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'goat.apps.lists',
     'goat.apps.accounts',
+    'functional_tests',
 )
 
 MIDDLEWARE_CLASSES = (
